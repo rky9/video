@@ -13,6 +13,7 @@ var vid, playbtn, seekslider, fullscreenmode;
      vid.addEventListener('timeupdate', seektimeupdate, false);
      fullscreenmode.addEventListener( "click", expandFullscreen, false);
      document.getElementById("my_video").addEventListener("ended", switchVideos, false);
+     myMove();
      
  }
  window.onload = intializePlayer;
@@ -52,6 +53,7 @@ var vid, playbtn, seekslider, fullscreenmode;
          oggVid.src = vidPlaylist[nextvidplay][2];
          player.load();
          player.play();
+         myMove();
          seekslider.value = 0;
          seekslider = document.getElementById('seekslider'+nextvidplay);
          seekslider.addEventListener("change", vidSeek, false);
@@ -61,6 +63,21 @@ var vid, playbtn, seekslider, fullscreenmode;
             vidPlaying = 0;
        
          }
+ }
+ function myMove() {
+    var elem = document.getElementById("my_video");
+    var pos = -1500;
+    var id = setInterval(frame, 10);
+    function frame() {
+        if (pos == 0) {
+            clearInterval(id);
+        } else {
+            pos = pos+10;
+            elem.style.left = pos + 'px';
+            //elem.style.top = pos + 'px';
+            
+        }
+    }
  }
  var vidPlaylist = [
      ["video/GOPR6239_1.mov", "video/GOPR6239_1.webm", "video/GOPR6239_1.mov"], 
